@@ -782,19 +782,24 @@ export default function Home() {
                       { text: "기관 흡인(석션) 🩺", msg: "기관 흡인(석션)이 필요해요" }
                     ].map((item, idx) => {
                       const id = `popup-call-emergency-${idx}`;
+                      const handleSosAction = () => {
+                        dispatchCaregiverAlert('emergency', item.msg);
+                        setTypedText(item.msg);
+                        setIsSosPopupOpen(false);
+                        setTimeout(() => {
+                          window.speechSynthesis?.cancel();
+                          const utt = new SpeechSynthesisUtterance(item.msg);
+                          utt.lang = 'ko-KR';
+                          window.speechSynthesis?.speak(utt);
+                        }, 300);
+                      };
                       return (
                         <button
                           key={idx}
                           className={`call-btn emergency-btn gazeable ${gazingId === id ? 'gazing' : ''}`}
-                          onMouseEnter={() => handleMouseEnter(id, () => {
-                            dispatchCaregiverAlert('emergency', item.msg);
-                            setIsSosPopupOpen(false);
-                          })}
+                          onMouseEnter={() => handleMouseEnter(id, handleSosAction)}
                           onMouseLeave={handleMouseLeave}
-                          onClick={() => handleManualClick(() => {
-                            dispatchCaregiverAlert('emergency', item.msg);
-                            setIsSosPopupOpen(false);
-                          })}
+                          onClick={() => handleManualClick(handleSosAction)}
                           style={{ padding: '20px 10px', fontSize: '1.3rem', borderRadius: '12px', minHeight: '80px' }}
                         >
                           {item.text}
@@ -811,19 +816,24 @@ export default function Home() {
                       { text: "불편 감지 ⚠️", msg: "몸이 너무 불편해요" }
                     ].map((item, idx) => {
                       const id = `popup-call-important-${idx}`;
+                      const handleSosAction = () => {
+                        dispatchCaregiverAlert('important', item.msg);
+                        setTypedText(item.msg);
+                        setIsSosPopupOpen(false);
+                        setTimeout(() => {
+                          window.speechSynthesis?.cancel();
+                          const utt = new SpeechSynthesisUtterance(item.msg);
+                          utt.lang = 'ko-KR';
+                          window.speechSynthesis?.speak(utt);
+                        }, 300);
+                      };
                       return (
                         <button
                           key={idx}
                           className={`call-btn important-btn gazeable ${gazingId === id ? 'gazing' : ''}`}
-                          onMouseEnter={() => handleMouseEnter(id, () => {
-                            dispatchCaregiverAlert('important', item.msg);
-                            setIsSosPopupOpen(false);
-                          })}
+                          onMouseEnter={() => handleMouseEnter(id, handleSosAction)}
                           onMouseLeave={handleMouseLeave}
-                          onClick={() => handleManualClick(() => {
-                            dispatchCaregiverAlert('important', item.msg);
-                            setIsSosPopupOpen(false);
-                          })}
+                          onClick={() => handleManualClick(handleSosAction)}
                           style={{ padding: '20px 10px', fontSize: '1.3rem', borderRadius: '12px', minHeight: '80px' }}
                         >
                           {item.text}
@@ -840,19 +850,24 @@ export default function Home() {
                       { text: "대화 요청 💬", msg: "대화 나누고 싶어요" }
                     ].map((item, idx) => {
                       const id = `popup-call-regular-${idx}`;
+                      const handleSosAction = () => {
+                        dispatchCaregiverAlert('regular', item.msg);
+                        setTypedText(item.msg);
+                        setIsSosPopupOpen(false);
+                        setTimeout(() => {
+                          window.speechSynthesis?.cancel();
+                          const utt = new SpeechSynthesisUtterance(item.msg);
+                          utt.lang = 'ko-KR';
+                          window.speechSynthesis?.speak(utt);
+                        }, 300);
+                      };
                       return (
                         <button
                           key={idx}
                           className={`call-btn regular-btn gazeable ${gazingId === id ? 'gazing' : ''}`}
-                          onMouseEnter={() => handleMouseEnter(id, () => {
-                            dispatchCaregiverAlert('regular', item.msg);
-                            setIsSosPopupOpen(false);
-                          })}
+                          onMouseEnter={() => handleMouseEnter(id, handleSosAction)}
                           onMouseLeave={handleMouseLeave}
-                          onClick={() => handleManualClick(() => {
-                            dispatchCaregiverAlert('regular', item.msg);
-                            setIsSosPopupOpen(false);
-                          })}
+                          onClick={() => handleManualClick(handleSosAction)}
                           style={{ padding: '20px 10px', fontSize: '1.3rem', borderRadius: '12px', minHeight: '80px' }}
                         >
                           {item.text}
